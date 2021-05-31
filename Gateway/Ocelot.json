@@ -1,0 +1,96 @@
+{
+  "Routes": [
+    //User Service
+    {
+      "DownstreamPathTemplate": "/api/users/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44300
+        }
+      ],
+      "UpstreamPathTemplate": "/userservice",
+      "UpstreamHttpMethod": [ "Get" , "POST"],
+      "Key": "user"
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44300
+        }
+      ],
+      "UpstreamPathTemplate": "/userservice/{id}",
+      "UpstreamHttpMethod": [ "Get" , "PUT", "DELETE" ],
+      "Key": "user2"
+    },
+
+    //Product Service
+    {
+      "DownstreamPathTemplate": "/api/products/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44360
+        }
+      ],
+      "UpstreamPathTemplate": "/productservice",
+      "UpstreamHttpMethod": [ "Get", "POST" ], //, //"POST"]//, "PUT", "DELETE" ]
+      "Key": "product"
+    },
+    {
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44360
+        }
+      ],
+      "UpstreamPathTemplate": "/productservice/{id}",
+      "UpstreamHttpMethod": [ "Get", "PUT", "DELETE" ],
+      "Key": "product2"
+    },
+    //order microservice
+    {
+      "DownstreamPathTemplate": "/api/orders/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44335
+        }
+      ],
+      "UpstreamPathTemplate": "/orderservice",
+      "UpstreamHttpMethod": [ "Get", "POST"] //, "PUT", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44335
+        }
+      ],
+      "UpstreamPathTemplate": "/orderservice/{id}",
+      "UpstreamHttpMethod": [ "Get","Put","Delete" ] // , //"POST"]//, "PUT", "DELETE" ]
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "user",
+        "product"
+      ],
+      "UpstreamPathTemplate": "/user-product"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:52793"
+  }
+}
